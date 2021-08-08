@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="WarpPlugin:jar">
+    <output-path>$PROJECT_DIR$/../../../../../../Minecraft Server with Plugins/Server/plugins</output-path>
+    <root id="root">
+      <element id="archive" name="WarpPlugin.jar">
+        <element id="module-output" name="WarpPlugin" />
+        <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+      </element>
+    </root>
+  </artifact>
+</component>
