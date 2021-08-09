@@ -53,15 +53,9 @@ public class Warp {
             return;
         }
 
-        int x = location.getBlockX();
-        int y = location.getBlockY();
-        int z = location.getBlockZ();
-        String worldName = Objects.requireNonNull(location.getWorld()).getName();
-
         try {
             FileWriter fileWriter = new FileWriter(file, true);
-            String data = "%s %d %d %d %s\n".formatted(warpName, x, y, z, worldName);
-            fileWriter.write(data);
+            convertDataToFile(warpName, location, fileWriter);
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,7 +63,7 @@ public class Warp {
 
         warps.put(warpName, location);
 
-        String message = "(Warp Plugin): Warp " + warpName + " created successfully!";
+        String message = "(Warp Plugin): Warp " + warpName + " has been created successfully!";
         player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
 
         String bcMessage = ChatColor.LIGHT_PURPLE + start + player.getName() + ChatColor.DARK_PURPLE
@@ -105,5 +99,46 @@ public class Warp {
             player.sendMessage(i + ": " + warp);
             i++;
         }
+    }
+
+    public void deleteWarp(Player player, String warpName) {
+        String start = "(Warp plugin): ";
+        if (!warps.containsKey(warpName)) {
+            String errorMessage = start + "Failed to execute command. Cannot find given name!";
+            player.sendMessage(errorMessage);
+            return;
+        }
+
+        warps.remove(warpName);
+
+        try {
+            FileWriter fileWriter = new FileWriter(file, false);
+            warps.forEach((key, value) -> {
+                try {
+                    convertDataToFile(key, value, fileWriter);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String message = "(Warp Plugin): Warp " + warpName + " has been deleted successfully!";
+        player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
+
+        String bcMessage = ChatColor.LIGHT_PURPLE + start + player.getName() + ChatColor.DARK_PURPLE
+                + " has deleted a warp " + warpName;
+        Bukkit.broadcastMessage(bcMessage);
+    }
+
+    private void convertDataToFile(String warpName, Location location, FileWriter fileWriter) throws IOException {
+        int x = location.getBlockX();
+        int y = location.getBlockY();
+        int z = location.getBlockZ();
+        String worldName = Objects.requireNonNull(location.getWorld()).getName();
+        String data = "%s %d %d %d %s\n".formatted(warpName, x, y, z, worldName);
+        fileWriter.write(data);
     }
 }

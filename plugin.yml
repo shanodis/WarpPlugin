@@ -1,10 +1,12 @@
 name: WarpPlugin
 main: me.shanodis.WarpPlugin.Main
-version: 1.0
+version: 1.3
 commands:
   warp:
-    description: Warps you to the given location.
+    description: Warps player to an indicated location.
   setwarp:
-    description: Sets new warp.
-  listwarps:
-    description: Prints list of warps.
+    description: Sets a new warp.
+  warplist:
+    description: Prints the list of warps.
+  warpdel:
+    description: Deletes an indicated warp.
