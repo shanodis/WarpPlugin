@@ -65,11 +65,11 @@ public class Warp {
 
         warps.put(warpName, location);
 
-        String message = "Warp " + warpName + "created successfully!";
+        String message = "Warp " + warpName + " created successfully!";
         player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
 
-        String bcMessage = "has created a new warp " + warpName;
-        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + player.getName() + ChatColor.LIGHT_PURPLE + bcMessage);
+        String bcMessage = " has created a new warp " + warpName;
+        Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + player.getName() + ChatColor.DARK_PURPLE + bcMessage);
     }
 
     public void warpPlayer(Player player, String warpName) {
