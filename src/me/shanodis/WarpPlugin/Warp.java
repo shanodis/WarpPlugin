@@ -46,8 +46,8 @@ public class Warp {
         String errorMessage = warps.containsValue(location) ? "This location is already added to list!"
                 : warps.containsKey(warpName) ? "Given name already exists in warp list!" : "";
 
-//        if (!errorMessage.isBlank())
-//            return;
+        if (!errorMessage.isBlank())
+            return;
 
         int x = location.getBlockX();
         int y = location.getBlockY();
@@ -65,7 +65,8 @@ public class Warp {
 
         warps.put(warpName, location);
 
-        player.sendMessage("Created warp!");
+        String message = "Warp " + warpName + "created successfully!";
+        player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
     }
 
     public void warpPlayer(Player player, String warpName) {
