@@ -43,11 +43,11 @@ public class Main extends JavaPlugin {
 			return false;
 		}
 
-		if (lowerCmd.equals("setwarp"))
-			warpHandler.createNewWarp(player, args[0].toUpperCase());
-
-		else if (lowerCmd.equals("warp"))
-			warpHandler.warpPlayer(player, args[0].toUpperCase());
+		switch (lowerCmd) {
+			case "setwarp" -> warpHandler.createNewWarp(player, args[0].toUpperCase());
+			case "warp" -> warpHandler.warpPlayer(player, args[0].toUpperCase());
+			case "listwarps" -> warpHandler.listWarps(player);
+		}
 
 		return true;
 	}

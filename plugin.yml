@@ -6,3 +6,5 @@ commands:
     description: Warps you to the given location.
   setwarp:
     description: Sets new warp.
+  listwarps:
+    description: Prints list of warps.

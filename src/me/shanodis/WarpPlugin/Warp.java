@@ -43,11 +43,15 @@ public class Warp {
 
     public void createNewWarp(Player player, String warpName) {
         Location location = player.getLocation();
-        String errorMessage = warps.containsValue(location) ? "This location is already added to list!"
+        String start = "(Warp plugin): ";
+        String errorMessage = start;
+        errorMessage += warps.containsValue(location) ? "This location is already added to list!"
                 : warps.containsKey(warpName) ? "Given name already exists in warp list!" : "";
 
-        if (!errorMessage.isBlank())
+        if (!errorMessage.equals(start)) {
+            player.sendMessage(errorMessage);
             return;
+        }
 
         int x = location.getBlockX();
         int y = location.getBlockY();
@@ -65,11 +69,12 @@ public class Warp {
 
         warps.put(warpName, location);
 
-        String message = "Warp " + warpName + " created successfully!";
+        String message = "(Warp Plugin): Warp " + warpName + " created successfully!";
         player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
 
-        String bcMessage = " has created a new warp " + warpName;
-        Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + player.getName() + ChatColor.DARK_PURPLE + bcMessage);
+        String bcMessage = ChatColor.LIGHT_PURPLE + start + player.getName() + ChatColor.DARK_PURPLE
+                + " has created a new warp " + warpName;
+        Bukkit.broadcastMessage(bcMessage);
     }
 
     public void warpPlayer(Player player, String warpName) {
@@ -84,5 +89,21 @@ public class Warp {
         String message = start + "Teleported to: " + warpName;
         player.teleport(location);
         player.sendMessage(ChatColor.LIGHT_PURPLE + ChatColor.BOLD.toString() + message);
+    }
+
+    public void listWarps(Player player) {
+        String start = "(Warp plugin): ";
+        if (warps.size() == 0) {
+            player.sendMessage(ChatColor.RED + start + "Warp list is empty!");
+            return;
+        }
+
+        player.sendMessage(start + "List of warps:"); // entry message
+
+        int i = 1;
+        for (String warp: warps.keySet()) {
+            player.sendMessage(i + ": " + warp);
+            i++;
+        }
     }
 }
