@@ -43,13 +43,14 @@ public class Main extends JavaPlugin {
             return false;
         };
 
-        if (lowerCmd.equals("warplist"))
+        if (lowerCmd.equals("warplist")) {
             if (args.length == 0) {
                 warpHandler.listWarps(player);
                 return true;
-            }
-            else
+            } else {
                 return printErrorMessage.apply("This command doesn't take any arguments!");
+            }
+        }
 
         String cmdArgument = args[0].toUpperCase();
         String oneArgAlert = "This command takes one argument!";
