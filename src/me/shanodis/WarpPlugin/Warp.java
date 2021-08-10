@@ -92,11 +92,11 @@ public class Warp {
             return;
         }
 
-        player.sendMessage(start + "List of warps:"); // entry message
+        player.sendMessage(ChatColor.LIGHT_PURPLE + start + "List of warps:"); // entry message
 
         int i = 1;
         for (String warp: warps.keySet()) {
-            player.sendMessage(i + ": " + warp);
+            player.sendMessage(ChatColor.DARK_PURPLE + String.valueOf(i) + ": " + ChatColor.LIGHT_PURPLE + warp);
             i++;
         }
     }
